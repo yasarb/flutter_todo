@@ -12,6 +12,9 @@ class HomePage extends StatelessWidget {
           height: height,
         ),
         Header(),
+        SizedBox(
+          height: 40,
+        ),
         TaskList()
       ],
     );
