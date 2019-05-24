@@ -12,7 +12,19 @@ class TodoApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: HomePage(),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0x778E9EAB),
+                Color(0xFFEEF2F3),
+              ],
+            ),
+          ),
+          child: HomePage(),
+        ),
       ),
     );
   }
