@@ -11,7 +11,8 @@ class HomePage extends StatelessWidget {
         SizedBox(
           height: height,
         ),
-        Header()
+        Header(),
+        TaskList()
       ],
     );
   }
