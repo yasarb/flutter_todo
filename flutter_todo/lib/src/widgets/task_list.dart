@@ -17,6 +17,12 @@ class _TaskListState extends State<TaskList> {
       Task('Complete 10 push ups', TaskStatus.postponed, 1),
       Task('Interview schedule for Mike', TaskStatus.postponed, 2),
       Task('Meeting', TaskStatus.postponed, 3),
+      Task('Complete 10 push ups', TaskStatus.postponed, 1),
+      Task('Interview schedule for Mike', TaskStatus.postponed, 2),
+      Task('Meeting', TaskStatus.postponed, 3),
+      Task('Complete 10 push ups', TaskStatus.postponed, 1),
+      Task('Interview schedule for Mike', TaskStatus.postponed, 2),
+      Task('Meeting', TaskStatus.postponed, 3),
     ];
 
     setState(() {
@@ -42,7 +48,8 @@ class _TaskListState extends State<TaskList> {
               setState(() => _taskList.removeAt(position));
               Scaffold.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(dir == DismissDirection.startToEnd ? "Item removed" : "Item Liked"),
+                  content:
+                      Text(dir == DismissDirection.startToEnd ? "Task removed" : "Task Posponed"),
                   action: SnackBarAction(
                       label: "UNDO",
                       onPressed: () {

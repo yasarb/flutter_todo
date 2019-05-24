@@ -43,7 +43,7 @@ class _Subtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'You have 3 tasks',
+      'You have 9 tasks',
       style: TextStyle(
         color: Colors.black54,
         fontSize: 18,
