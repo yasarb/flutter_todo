@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+
+import 'package:flutter_todo/src/provider/task_list_provider.dart';
 
 class Header extends StatelessWidget {
   @override
@@ -42,8 +46,9 @@ class _Title extends StatelessWidget {
 class _Subtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final taskListProvider = Provider.of<TaskListProvider>(context);
     return Text(
-      'You have 9 tasks',
+      taskCount(taskListProvider.length()),
       style: TextStyle(
         color: Colors.black54,
         fontSize: 18,
@@ -51,4 +56,14 @@ class _Subtitle extends StatelessWidget {
       ),
     );
   }
+
+  String taskCount(int howMany) => Intl.plural(
+        howMany,
+        zero: 'You have no task',
+        one: 'You have $howMany task',
+        other: 'You have $howMany tasks',
+        args: [howMany],
+        name: 'taskCount',
+        desc: 'Task counter',
+      );
 }
