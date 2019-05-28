@@ -12,7 +12,7 @@ class TaskListProvider extends ChangeNotifier {
   List<Task> taskList;
 
   TaskListProvider() {
-    var rng = new Random(123456789);
+    var rng = new Random(new DateTime.now().millisecondsSinceEpoch);
 
     List<DateTime> randomDates = new List.generate(
       9,
