@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import 'package:flutter_todo/src/models/task.dart';
 
 class TaskListItem extends StatelessWidget {
@@ -8,6 +10,17 @@ class TaskListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var dateFormat;
+
+    if (task.dueDate.year == DateTime.now().year) {
+      // don't show if it is in current year
+      dateFormat = 'EEE, MMM d, h:mm a';
+    } else {
+      dateFormat = 'EEE, MMM d, y, h:mm a';
+    }
+
+    var formattedDate = new DateFormat(dateFormat).format(task.dueDate);
+
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 20),
       elevation: 2,
@@ -26,7 +39,7 @@ class TaskListItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Due Fri Agu 8',
+                  'Due ' + formattedDate,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
