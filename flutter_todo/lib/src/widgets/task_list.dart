@@ -1,51 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'package:flutter_todo/src/models/task.dart';
 import 'package:flutter_todo/src/widgets/task_list_item.dart';
+import 'package:flutter_todo/src/provider/task_list_provider.dart';
 
-class TaskList extends StatefulWidget {
-  @override
-  _TaskListState createState() => _TaskListState();
-}
-
-class _TaskListState extends State<TaskList> {
-  List<Task> _taskList;
-
-  @override
-  void initState() {
-    List<Task> myList = [
-      Task('Complete 10 push ups', TaskStatus.postponed, 1),
-      Task('Interview schedule for Mike', TaskStatus.postponed, 2),
-      Task('Meeting', TaskStatus.postponed, 3),
-      Task('Complete 10 push ups', TaskStatus.postponed, 1),
-      Task('Interview schedule for Mike', TaskStatus.postponed, 2),
-      Task('Meeting', TaskStatus.postponed, 3),
-      Task('Complete 10 push ups', TaskStatus.postponed, 1),
-      Task('Interview schedule for Mike', TaskStatus.postponed, 2),
-      Task('Meeting', TaskStatus.postponed, 3),
-    ];
-
-    setState(() {
-      _taskList = myList;
-    });
-  }
-
+class TaskList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final taskListProvider = Provider.of<TaskListProvider>(context);
+
     return Expanded(
       child: ListView.separated(
-        itemCount: _taskList.length,
+        itemCount: taskListProvider.length(),
         separatorBuilder: (context, position) {
           return SizedBox(
             height: 15,
           );
         },
         itemBuilder: (context, position) {
-          final task = _taskList[position];
+          final task = taskListProvider.get(position);
+
           return Dismissible(
             key: Key(task.title),
             onDismissed: (DismissDirection dir) {
-              setState(() => _taskList.removeAt(position));
+              taskListProvider.removeAt(position);
               Scaffold.of(context).showSnackBar(
                 SnackBar(
                   content:
@@ -53,14 +31,14 @@ class _TaskListState extends State<TaskList> {
                   action: SnackBarAction(
                       label: "UNDO",
                       onPressed: () {
-                        setState(() => _taskList.insert(position, task));
+                        taskListProvider.add(task, position: position);
                       }),
                 ),
               );
             },
             background: _LeftToRight(),
             secondaryBackground: _RightToLeft(),
-            child: TaskListItem(_taskList[position]),
+            child: TaskListItem(taskListProvider.get(position)),
           );
         },
       ),
