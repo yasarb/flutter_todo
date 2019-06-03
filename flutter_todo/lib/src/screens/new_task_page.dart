@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_todo/src/widgets/widgets.dart';
+
 class NewTaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -109,11 +111,11 @@ class _NewTaskBottomBar extends StatelessWidget {
             size: 32,
           ),
           onPressed: () {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Not implemented yet.'),
-                action: SnackBarAction(label: "DONE", onPressed: () {}),
-              ),
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return DateTimeDialog();
+              },
             );
           },
         ),
